@@ -5,7 +5,6 @@
 from os.path import join, dirname
 import tensorflow as tf
 import glob
-import numpy as np
 
 
 # Copied from tensorflow documentation.
@@ -88,7 +87,6 @@ def serialize(image, label):
     sample, height, width, channel = image.shape
 
     example = tf.train.Example(features=tf.train.Features(feature={
-        'image/sample' : _int64_feature(sample),
         'image/width' : _int64_feature(width),
         'image/height' : _int64_feature(height),
         'image/channel' : _int64_feature(channel),
@@ -100,7 +98,6 @@ def serialize(image, label):
 
 
 _FEATURE_DESCRIPTION = {
-    'image/sample' : tf.io.FixedLenFeature([], tf.int64),
     'image/width' : tf.io.FixedLenFeature([], tf.int64),
     'image/height' : tf.io.FixedLenFeature([], tf.int64),
     'image/channel' : tf.io.FixedLenFeature([], tf.int64),
@@ -121,14 +118,13 @@ def deserialize(raw_example):
     '''
     example = tf.io.parse_single_example(raw_example, _FEATURE_DESCRIPTION)
 
-    sample = example['image/sample']
     width = example['image/width']
     height = example['image/height']
     channel = example['image/channel']
     label = example['image/label']
     data = example['image/data']
 
-    return tf.reshape(data, (sample, width, height, channel)), label
+    return tf.reshape(data, (width, height, channel)), label
 
 
 def _load(data_type):
