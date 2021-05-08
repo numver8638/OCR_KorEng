@@ -5,16 +5,26 @@
 from datetime import datetime
 import tensorflow as tf
 from tensorflow.keras import layers, models, callbacks
+import os
 from os.path import dirname, exists, join
 import multiprocessing as mp
+import json
 
 import dataset
 
 PROJECT_ROOT = dirname(__file__)
 MODELS_ROOT = join(PROJECT_ROOT, 'models')
 LOGS_ROOT = join(PROJECT_ROOT, 'logs')
-BATCH_SIZE = 16
-EPOCHS = 20
+HYPERPARAMS_FILE = join(PROJECT_ROOT, 'hyperparams.json')
+
+BATCH_SIZE = 32
+EPOCHS = 50
+
+
+def load_hyperparams():
+    with open(HYPERPARAMS_FILE) as f:
+        return json.load(f)
+
 
 def fit(folder_name):
     hp = load_hyperparams()
@@ -23,21 +33,26 @@ def fit(folder_name):
     validation_data = dataset.load_validation().shuffle(1000).batch(BATCH_SIZE)
 
     model = models.Sequential(layers=[
-        layers.Conv2D(32, (3, 3), activation='relu', input_shape=(32, 32, 1)),
+        layers.Conv2D(hp['conv2d_0_filters'], (3, 3), activation='relu', input_shape=(32, 32, 1)),
         layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(64, (3, 3), activation='relu'),
+        layers.Dropout(hp['dropout_0']),
+        layers.Conv2D(hp['conv2d_1_filters'], (3, 3), activation='relu'),
         layers.MaxPooling2D((2, 2)),
-        layers.Conv2D(64, (3, 3), activation='relu'),
+        layers.Dropout(hp['dropout_1']),
+        layers.Conv2D(hp['conv2d_2_filters'], (3, 3), activation='relu'),
         layers.Flatten(),
-        layers.Dense(128, activation='relu'),
+        layers.Dense(hp['dense_0_units'], activation='relu'),
+        layers.Dropout(hp['dropout_2']),
+        layers.Dense(hp['dense_1_units'], activation='relu'),
         layers.Dense(dataset.MAX_CHARS, activation='softmax')
     ])
 
     model.summary()
 
-    model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=['accuracy'])
-
-    model.fit(train_data,
+    opt = tf.keras.optimizers.Adam(learning_rate=hp['learning_rate'])
+    model.compile(optimizer=opt, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    
+    model.fit(train_data,  
               epochs=EPOCHS, 
               validation_data=validation_data,
               verbose=2,
@@ -72,4 +87,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("usage: fit.py <folder_name>")
     elif not exists(HYPERPARAMS_FILE):
+        print("hyperparams.json is not exist. run 'python tune_hyper.py' first.")
+    else:
         fit(sys.argv[1])
