@@ -9,6 +9,7 @@
 - Pillow (`pillow`)
 - OpenCV (`opencv-python`)
 - FreeType (`freetype-py`)
+- Keras Tuner (`keras-tuner`)
 
 ## Usage
 - `python datagen.py` : Generate `tfrecord` dataset from fonts.
