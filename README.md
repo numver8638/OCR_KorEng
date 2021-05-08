@@ -13,7 +13,8 @@
 
 ## Usage
 - `python datagen.py` : Generate `tfrecord` dataset from fonts.
-- `python fit.py` : Train model.
+- `python fit.py <folder_name> (or fit.sh)` : Train model.
+- `python tune_hyper.py` : Find hyperparameters for best accuracy.
 - `python convert_lite.py` : Convert Tensorflow model to Tensorflow-lite model.
 - `python predict.py` : Predict with generated model. 
 
