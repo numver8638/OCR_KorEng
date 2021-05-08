@@ -41,7 +41,7 @@ def model_builder(hp):
     conv2d_1 = hp.Int('conv2d_1_filters', min_value=MIN_FILTERS, max_value=MAX_FILTERS, step=FILTER_STEP)
     conv2d_2 = hp.Int('conv2d_2_filters', min_value=MIN_FILTERS, max_value=MAX_FILTERS, step=FILTER_STEP)
     dense_0 = hp.Int('dense_0_units', min_value=MIN_UNITS, max_value=MAX_UNITS, step=UNIT_STEP)
-    dense_1 = hp.Int('dense_1_units', min_value=MIN_FILTERS, max_value=MAX_FILTERS, step=FILTER_STEP)
+    dense_1 = hp.Int('dense_1_units', min_value=MIN_UNITS, max_value=MAX_UNITS, step=UNIT_STEP)
     dropout_0 = hp.Float('dropout_0', min_value=MIN_DROPOUT, max_value=MAX_DROPOUT, step=DROPOUT_STEP)
     dropout_1 = hp.Float('dropout_1', min_value=MIN_DROPOUT, max_value=MAX_DROPOUT, step=DROPOUT_STEP)
     dropout_2 = hp.Float('dropout_2', min_value=MIN_DROPOUT, max_value=MAX_DROPOUT, step=DROPOUT_STEP)
