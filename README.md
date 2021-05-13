@@ -29,6 +29,7 @@ This project (OCR_KorEng) is licensed under the MIT License. Also, various open 
 - [Pillow](https://python-pillow.org/) is licensed under the HPND License. Refer [here](https://github.com/python-pillow/Pillow/blob/master/LICENSE).
 - [OpenCV](https://opencv.org/) is licensed under the Apache License 2.0. (4.5.0 and higher)
 - [FreeType](https://www.freetype.org/) is licensed under the FreeType License. Refer [here](https://gitlab.freedesktop.org/freetype/freetype/-/blob/master/docs/FTL.TXT).
+- [Keras Tuner](https://keras-team.github.io/keras-tuner/) is licensed under the Apache-2.0 License.
 
 ### Used Fonts
 | Font File                      | Font Name (English)        | Font Name (Korean)       | Author                        | License         | From       |
