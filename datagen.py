@@ -5,7 +5,8 @@
 import glob
 import multiprocessing as mp
 import os
-from os.path import join, dirname, basename
+from os.path import join, dirname, basename, splitext
+from itertools import repeat
 
 import freetype as ft
 import numpy as np
@@ -59,11 +60,7 @@ def generate_data(data_type, font_file, batch_size):
     face = ft.Face(font_file)
     face.set_pixel_sizes(32, 32)
 
-    font_name = None
-    if isinstance(face.family_name, str):
-        font_name = face.family_name
-    else:
-        font_name = face.family_name.decode('utf-8') if face.family_name is not None else None
+    font_name, _ = splitext(basename(font_file))
 
     print("Generate {1} dataset from font '{0}'...".format(font_name, data_type))
 
@@ -79,12 +76,19 @@ def generate_data(data_type, font_file, batch_size):
             image = np.fromiter(bitmap_generator(face.glyph.bitmap), int, count=dataset.WIDTH*dataset.HEIGHT)
             image.resize((1, dataset.WIDTH, dataset.HEIGHT, 1))
 
-            augmented_image_generator = IMAGE_GENERATOR.flow(image, batch_size=1)
+            augmented_image_generator = None
 
-            for i in range(batch_size):
+            if data_type != 'test':
+                augmented_image_generator = IMAGE_GENERATOR.flow(image, batch_size=1)
+            else:  # data_type == 'test'
+                augmented_image_generator = (image for _ in repeat(0))
+
+            for _ in range(batch_size):
                 image = next(augmented_image_generator)
                 writer.write(dataset.serialize(image, dataset.INDEXES[ch]))
 
+
+    print("Generate {1} dataset from font '{0}'... done.".format(font_name, data_type))
 
 if __name__ == '__main__':
     def data():
