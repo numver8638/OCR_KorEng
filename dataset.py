@@ -84,7 +84,7 @@ def serialize(image, label):
     Returns:
         ... 
     '''
-    sample, height, width, channel = image.shape
+    _, height, width, channel = image.shape
 
     example = tf.train.Example(features=tf.train.Features(feature={
         'image/width' : _int64_feature(width),
@@ -130,8 +130,14 @@ def deserialize(raw_example):
 def _load(data_type):
     files = glob.glob(join(DATA_ROOT, data_type, '*.tfrecord'))
 
-    return tf.data.TFRecordDataset(filenames=files, compression_type="GZIP").map(deserialize)
+    options = tf.data.Options()
+    options.experimental_deterministic = False  # Disable order.
 
+    dataset = tf.data.TFRecordDataset(filenames=files, compression_type='GZIP')
+    dataset = dataset.with_options(options)
+    dataset = dataset.map(deserialize)
+
+    return dataset
 
 def load_train():
     '''
