@@ -51,7 +51,6 @@ HEIGHT = 32
 _CHAR_RANGES = (
     (0x0021, 0x007F),
     (0x3131, 0x3164),
-    (0x3165, 0x318F),
     # (0x3165, 0x318F),  # Hangul Yethangul (Old korean consonant and vowel letters)
     (0xAC00, 0xD7A4)
 )
