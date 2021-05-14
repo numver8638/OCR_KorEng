@@ -27,10 +27,10 @@ def PreprocessingImage(targetImage):
     #다음 이미지의 글자 영역을 번지게하여 덩어리를 만들 수 있도록 전처리라고 할 수 있을 것이다. 
     #(이 부분이 글자를 번지게 처리하는 과정에서 결과적으로 효과를 증대할 수 있지 않을까 추측함)
     #
-    binarizedImage = cv2.adaptiveThreshold(edgedImage, 255, cv2.ADAPTIVE_THRESH_MEAN_C,  cv2.THRESH_BINARY_INV, 3, 30)
+    #binarizedImage = cv2.adaptiveThreshold(edgedImage, 255, cv2.ADAPTIVE_THRESH_MEAN_C,  cv2.THRESH_BINARY_INV, 3, 30)
 
     #cv2.morphologyEx() 글자를 번지게하여 하나의 덩어리로써 검출될 수 있도록 하는 작업이다.
-    morphedImage = cv2.morphologyEx(binarizedImage, cv2.MORPH_CLOSE, np.ones((6, 15), np.uint8))
+    morphedImage = cv2.morphologyEx(edgedImage, cv2.MORPH_CLOSE, np.ones((6,15), np.uint8))
     #위로 좀 더 번지게 만들어보기
     return morphedImage.copy()
 
@@ -60,7 +60,7 @@ def testPreprocessingImage(targetImage):
 #
 #   이미지의 저장된 경로와 파일명 변수이다.
 #
-fileName = 'test2.jpg'
+fileName = 'test3.png'
 filePath = 'C:\python\dev' + '/'
 fullPath = filePath + fileName
   
@@ -98,13 +98,14 @@ for r in contours:
         rectImageContours, _ = cv2.findContours(newResultImage.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         for r2 in rectImageContours:
             (x2, y2, w2, h2) = cv2.boundingRect(r2)   
-            if  w >= 1 and h >= 1:   
+            if  w2 >= 1 and h2 >= 1:
                 newDetectedWordImage = image[y+y2-5:y+y2+h2+5, x+x2-5:x+x2+w2+5]
                 cv2.rectangle(image, (x+x2, y+y2), (x+x2 +w2, y+y2+h2), (0, 0, 255), 2)
                 #cv2.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
                 #cv2.imshow("image", image)
-                
-cv2.imshow("dectectedimage", image)
+ 
+showImage = cv2.resize(image, dsize = (1920,1080), interpolation=cv2.INTER_AREA) 
+cv2.imshow("dectectedimage", showImage)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 

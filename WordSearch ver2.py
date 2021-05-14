@@ -12,7 +12,7 @@ import numpy as np
 #
 #   이미지의 저장된 경로와 파일명 변수이다.
 #
-fileName = 'test2.jpg'
+fileName = 'test3.png'
 filePath = 'C:\python\dev' + '/'
 fullPath = filePath + fileName
 
@@ -44,8 +44,11 @@ edgedImage = cv2.Canny(BlurredImage, 30, 150)
 binarizedImage = cv2.adaptiveThreshold(edgedImage, 255, cv2.ADAPTIVE_THRESH_MEAN_C,  cv2.THRESH_BINARY_INV, 3, 30)
 
 #cv2.morphologyEx() 글자를 번지게하여 하나의 덩어리로써 검출될 수 있도록 하는 작업이다.
-morphedImage = cv2.morphologyEx(binarizedImage, cv2.MORPH_CLOSE, np.ones((6, 15), np.uint8))
-
+#morphedImage = cv2.morphologyEx(binarizedImage, cv2.MORPH_CLOSE, np.ones((3,3), np.uint8))
+morphedImage = cv2.erode(binarizedImage, np.ones((1,1), np.uint8), iterations = 1)
+morphedImage = cv2.dilate(morphedImage, np.ones((2,2), np.uint8), iterations = 1)
+cv2.imshow("imawge", morphedImage)
+cv2.waitKey(0)
 
 #
 #위에서 전처리된 이미지 영상의 결과 이미지를 통해 각 글자 영역을 검출한다.
@@ -59,8 +62,8 @@ for r in contours:
     # 입력 이미지 영상을 슬라이싱하여 반환한다.
     #
     (x, y, w, h) = cv2.boundingRect(r)
-    if  w >= 5 and h >= 8:
-        rectSize = 10
+    if  w >= 2 and h >= 4:
+        rectSize = 0
         #returnImage = cv2.resize(wordImage, dsize = (32,32), interpolation=cv2.INTER_AREA)
         #filename = str(fileNameCount) + '.jpg'
         #cv2.imwrite('C:\python\dev' + '/'+filename, returnImage)
@@ -78,3 +81,4 @@ for r in contours:
         cv2.imshow("image", image)
         cv2.imshow("dectectedimage", detectedWordImage)
         cv2.waitKey(0)
+        cv2.destroyAllWindows()
