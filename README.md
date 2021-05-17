@@ -41,7 +41,7 @@ This project (OCR_KorEng) is licensed under the MIT License. Also, various open 
 | DungGeunMo.ttf                 | DungGeunMo                 | 둥근모                   | 길형진 (orioncactus)          | Public Domain   | 눈누***    |
 | Gmarket Sans TTF Medium.ttf    | Gmarket Sans TTF Medium    | G마켓 산스 TTF Medium    | G마켓                         | OFL             | 눈누***    |
 | GyeonggiBatang Regular.ttf     | GyeonggiBatang Regular     | 경기천년바탕 Regular     | 경기도                        | 공공누리 1유형* | 공유마당** |
-| GyeonggiTitle.ttf              | GyeonggiTitle Light        | 경기천년제목 Light       | 경기도                        | 공공누리 1유형* | 공유마당** |
+| GyeonggiTitle Medium.ttf       | GyeonggiTitle Medium       | 경기천년제목 Medium      | 경기도                        | 공공누리 1유형* | 공유마당** |
 | HangultuelGothic-Regular.ttf   | HangultuelGothic-Regular   | 한글틀고딕Regular        | 한글마을                      | OFL             | 눈누***    |
 | Iropke Batang Medium.ttf       | Iropke Batang Medium       | 이롭게 바탕체 Medium     | 이롭게                        | OFL             | 눈누***    |
 | JejuGothic.ttf                 | JejuGothic                 | 제주고딕                 | 제주시                        | 공공누리 1유형* | 공유마당** |
@@ -51,7 +51,7 @@ This project (OCR_KorEng) is licensed under the MIT License. Also, various open 
 | KCCDodamdodam.ttf              | KCCDodamdodam              | KCC도담도담체            | 한국저작권위원회              | OFL             | 공유마당** |
 | KCCImkwontaek.ttf              | KCCImkwontaek              | KCC임권택체              | 한국저작권위원회              | OFL             | 공유마당** |
 | KHNPHanuoolim.ttf              | KHNPHanuoolim              | 한수원 한울림            | 한국수력원자력                | 공공누리 1유형* | 공유마당** |
-| KoPubWorldDotum.ttf            | KoPubWorldDotum Light      | KoPubWorld돋움체 Light   | 문화체육관광부, 한국출판회의  | 공공누리 1유형* | 공유마당** |
+| KoPubWorldDotum Medium.ttf     | KoPubWorldDotum Medium     | KoPubWorld돋움체 Medium  | 문화체육관광부, 한국출판회의  | 공공누리 1유형* | 공유마당** |
 | Nanum BaReunHiPi.ttf           | Nanum BaReunHiPi           | 나눔손글씨 바른히피      | (주)네이버, 재 네이버문화재단 | OFL             | 눈누***    |
 | Nanum Brush Script.ttf         | Nanum Brush Script         | 나눔손글씨 붓            | (주)네이버, 재 네이버문화재단 | OFL             | 공유마당** |
 | Nanum JangMiCe.ttf             | Nanum JangMiCe             | 나눔손글씨 장미체        | (주)네이버, 재 네이버문화재단 | OFL             | 눈누***    |
