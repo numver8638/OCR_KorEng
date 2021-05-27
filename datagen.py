@@ -57,6 +57,7 @@ def generate_data(data_type, font_file, batch_size):
                                          height_shift_range=0.1,
                                          # zoom_range=[0.5, 0.8],
                                          rescale=1.0/255.0)
+    
     face = ft.Face(font_file)
     face.set_pixel_sizes(32, 32)
 
@@ -81,7 +82,7 @@ def generate_data(data_type, font_file, batch_size):
             if data_type != 'test':
                 augmented_image_generator = IMAGE_GENERATOR.flow(image, batch_size=1)
             else:  # data_type == 'test'
-                augmented_image_generator = (image for _ in repeat(0))
+                augmented_image_generator = (image / 255.0 for _ in repeat(0))
 
             for _ in range(batch_size):
                 image = next(augmented_image_generator)
@@ -92,7 +93,7 @@ def generate_data(data_type, font_file, batch_size):
 
 if __name__ == '__main__':
     def data():
-        for data_type, batch_size in ('train', 10), ('validation', 1), ('test', 1):
+        for data_type, batch_size in ('train', 3), ('validation', 1), ('test', 1):
             for font_file in glob.glob(join(dataset.FONT_ROOT, '*.ttf')):
                 yield data_type, font_file, batch_size
 
