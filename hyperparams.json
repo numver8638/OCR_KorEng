@@ -1,0 +1,15 @@
+{
+  "conv2d_0_filters": 64,
+  "conv2d_1_filters": 64,
+  "conv2d_2_filters": 128,
+  "conv2d_3_filters": 128,
+  "conv2d_4_filters": 256,
+  "conv2d_5_filters": 256,
+  "dense_0_units": 1024,
+  "dense_1_units": 1024,
+  "dense_2_units": 2048,
+  "dropout_0": 0.3,
+  "dropout_1": 0.3,
+  "dropout_2": 0.3,
+  "dropout_3": 0.3
+}

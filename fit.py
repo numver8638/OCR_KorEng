@@ -33,17 +33,22 @@ def fit(folder_name):
     validation_data = dataset.load_validation().shuffle(1000).batch(BATCH_SIZE)
 
     model = models.Sequential(layers=[
-        layers.Conv2D(hp['conv2d_0_filters'], (3, 3), activation='relu', input_shape=(32, 32, 1)),
+        layers.Conv2D(hp['conv2d_0_filters'], (3, 3), activation='relu', padding='same', input_shape=(32, 32, 1)),
+        layers.Conv2D(hp['conv2d_1_filters'], (3, 3), activation='relu', padding='same'),
         layers.MaxPooling2D((2, 2)),
         layers.Dropout(hp['dropout_0']),
-        layers.Conv2D(hp['conv2d_1_filters'], (3, 3), activation='relu'),
+        layers.Conv2D(hp['conv2d_2_filters'], (3, 3), activation='relu'),
+        layers.Conv2D(hp['conv2d_3_filters'], (3, 3), activation='relu'),
         layers.MaxPooling2D((2, 2)),
         layers.Dropout(hp['dropout_1']),
-        layers.Conv2D(hp['conv2d_2_filters'], (3, 3), activation='relu'),
+        layers.Conv2D(hp['conv2d_4_filters'], (3, 3), activation='relu'),
+        layers.Conv2D(hp['conv2d_5_filters'], (3, 3), activation='relu'),
         layers.Flatten(),
         layers.Dense(hp['dense_0_units'], activation='relu'),
         layers.Dropout(hp['dropout_2']),
         layers.Dense(hp['dense_1_units'], activation='relu'),
+        layers.Dropout(hp['dropout_3']),
+        layers.Dense(hp['dense_2_units'], activation='relu'),
         layers.Dense(dataset.MAX_CHARS, activation='softmax')
     ])
 
@@ -87,6 +92,6 @@ if __name__ == '__main__':
     if len(sys.argv) != 2:
         print("usage: fit.py <folder_name>")
     elif not exists(HYPERPARAMS_FILE):
-        print("hyperparams.json is not exist. run 'python tune_hyper.py' first.")
+        print("hyperparams.json is not exist.")
     else:
         fit(sys.argv[1])
