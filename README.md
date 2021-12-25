@@ -16,7 +16,7 @@
 - `python fit.py <folder_name> (or fit.sh)` : Train model.
 - `python tune_hyper.py` : Find hyperparameters for best accuracy.
 - `python convert_lite.py` : Convert Tensorflow model to Tensorflow-lite model.
-- `python predict.py` : Predict with generated model. 
+- `python recog.py <image>` : Recognize text with generated model. 
 
 ## License
 이 프로젝트는 MIT License를 따르고 있습니다. 이 프로젝트에서 사용하는 다른 오픈소스 라이브러리의 라이선스는 아래를 참고하십시오.  
